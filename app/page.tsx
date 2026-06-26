@@ -68,11 +68,11 @@ export default function HomePage() {
     <div className="overflow-hidden bg-[#fbf6ec] text-[#21160f]">
       <section className="relative min-h-[92vh] overflow-hidden">
         <Image
-          src="/images/hero-family-mity3548web.jpg"
-          alt="Счастливая семья в теплой домашней атмосфере"
+          src="/images/hero-background-mity3706.jpg"
+          alt="Пара в современном премиальном пространстве"
           fill
           priority
-          className="scale-110 object-cover object-center blur-sm saturate-[0.92]"
+          className="scale-105 object-cover object-[42%_center] saturate-[0.96]"
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_30%,rgba(255,224,166,0.28),transparent_32%),linear-gradient(90deg,rgba(30,17,10,0.93)_0%,rgba(70,42,28,0.78)_45%,rgba(255,246,231,0.30)_100%)]" />
