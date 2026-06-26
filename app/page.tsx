@@ -72,11 +72,21 @@ export default function HomePage() {
           alt="Счастливая семья в теплой домашней атмосфере"
           fill
           priority
-          className="scale-[1.02] object-cover object-[50%_44%]"
+          className="scale-110 object-cover object-center blur-sm saturate-[0.92]"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,rgba(255,235,189,0.24),transparent_30%),linear-gradient(90deg,rgba(30,17,10,0.90)_0%,rgba(80,43,22,0.68)_42%,rgba(255,246,231,0.08)_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.10)_0%,rgba(0,0,0,0)_58%,#fbf6ec_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_30%,rgba(255,224,166,0.28),transparent_32%),linear-gradient(90deg,rgba(30,17,10,0.93)_0%,rgba(70,42,28,0.78)_45%,rgba(255,246,231,0.30)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.08)_0%,rgba(0,0,0,0)_58%,#fbf6ec_100%)]" />
+        <div className="absolute inset-y-4 right-0 hidden w-[46vw] md:block">
+          <Image
+            src="/images/hero-family-mity3548web.jpg"
+            alt="Счастливая семья в зеленом парке"
+            fill
+            priority
+            className="object-contain object-right-center drop-shadow-[0_34px_80px_rgba(34,19,12,0.34)]"
+            sizes="46vw"
+          />
+        </div>
 
         <div className="relative mx-auto flex min-h-[92vh] w-full max-w-7xl flex-col justify-center px-4 pb-20 pt-24 sm:px-6 lg:px-8">
           <div className="max-w-3xl animate-rise text-white">
