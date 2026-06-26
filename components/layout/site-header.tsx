@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { ArrowRight, HeartHandshake, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -21,59 +21,92 @@ export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-forest/10 bg-[#fbfaf7]/90 backdrop-blur">
-      <div className="mx-auto flex min-h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 border-b border-[#ead9be]/70 bg-[#fbf6ec]/78 shadow-[0_18px_70px_rgba(88,56,31,0.08)] backdrop-blur-2xl">
+      <div className="mx-auto flex min-h-20 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3" onClick={() => setIsOpen(false)}>
-          <span className="flex size-9 items-center justify-center rounded-md bg-forest text-sm font-bold text-white">
-            ХС
+          <span className="flex size-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#21150f,#6f3b1f)] text-white shadow-[0_18px_50px_rgba(33,21,15,0.20)]">
+            <HeartHandshake size={22} />
           </span>
-          <span className="font-semibold text-ink">Химия счастья</span>
+          <span className="grid leading-tight">
+            <span className="text-base font-semibold tracking-[-0.02em] text-[#23150d]">
+              Химия счастья
+            </span>
+            <span className="text-xs font-medium text-[#8a6a55]">AI для отношений</span>
+          </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Основная навигация">
-          {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "rounded-md px-3 py-2 text-sm font-medium text-neutral-600 transition hover:bg-white hover:text-forest",
-                pathname === item.href && "bg-white text-forest shadow-sm",
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="Основная навигация">
+          {navigation.map((item) => {
+            const isActive = pathname === item.href;
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "rounded-full px-4 py-2 text-sm font-semibold text-[#6e5848] transition duration-300 hover:bg-white/72 hover:text-[#21150f]",
+                  isActive && "bg-white text-[#21150f] shadow-[0_12px_40px_rgba(88,56,31,0.10)]",
+                )}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
+
+        <div className="hidden items-center gap-3 lg:flex">
+          <Link
+            href="/diagnostics"
+            className="rounded-full border border-[#d9bf95] bg-white/50 px-5 py-3 text-sm font-semibold text-[#342217] transition duration-300 hover:bg-white"
+          >
+            Диагностика
+          </Link>
+          <Link
+            href="/contacts"
+            className="group inline-flex items-center gap-2 rounded-full bg-[#21150f] px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_50px_rgba(33,21,15,0.18)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#6f3b1f]"
+          >
+            Записаться
+            <ArrowRight size={16} className="transition duration-300 group-hover:translate-x-1" />
+          </Link>
+        </div>
 
         <button
           type="button"
-          className="inline-flex size-10 items-center justify-center rounded-md border border-forest/15 bg-white text-forest md:hidden"
+          className="inline-flex size-11 items-center justify-center rounded-2xl border border-[#d9bf95] bg-white/70 text-[#21150f] shadow-[0_14px_40px_rgba(88,56,31,0.10)] lg:hidden"
           onClick={() => setIsOpen((value) => !value)}
           aria-label={isOpen ? "Закрыть меню" : "Открыть меню"}
         >
-          {isOpen ? <X size={20} /> : <Menu size={20} />}
+          {isOpen ? <X size={21} /> : <Menu size={21} />}
         </button>
       </div>
 
       {isOpen ? (
         <nav
-          className="border-t border-forest/10 bg-white px-4 py-3 md:hidden"
+          className="border-t border-[#ead9be] bg-[#fbf6ec]/96 px-4 py-4 shadow-[0_24px_70px_rgba(88,56,31,0.10)] backdrop-blur-2xl lg:hidden"
           aria-label="Мобильная навигация"
         >
-          <div className="mx-auto grid max-w-6xl gap-1">
+          <div className="mx-auto grid max-w-7xl gap-2">
             {navigation.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
                 className={cn(
-                  "rounded-md px-3 py-3 text-sm font-medium text-neutral-700",
-                  pathname === item.href && "bg-mist text-forest",
+                  "rounded-2xl px-4 py-3 text-sm font-semibold text-[#6e5848] transition hover:bg-white",
+                  pathname === item.href && "bg-white text-[#21150f] shadow-[0_12px_40px_rgba(88,56,31,0.10)]",
                 )}
               >
                 {item.label}
               </Link>
             ))}
+            <Link
+              href="/contacts"
+              onClick={() => setIsOpen(false)}
+              className="mt-2 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#21150f] px-5 py-3 text-sm font-semibold text-white"
+            >
+              Записаться
+              <ArrowRight size={16} />
+            </Link>
           </div>
         </nav>
       ) : null}
