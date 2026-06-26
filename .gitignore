@@ -1,0 +1,16 @@
+node_modules
+.pnpm-store
+.next
+out
+dist
+.env
+.env*.local
+*.log
+.vercel
+coverage
+.DS_Store
+*.tsbuildinfo
+work
+outputs
+.agents
+.git
