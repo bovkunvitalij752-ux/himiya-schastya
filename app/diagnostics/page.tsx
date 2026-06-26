@@ -10,6 +10,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -104,6 +105,16 @@ export default function DiagnosticsPage() {
                 <div className="flex size-12 items-center justify-center rounded-2xl bg-[#21150f] text-[#ffd58c]">
                   <BrainCircuit size={24} />
                 </div>
+              </div>
+
+              <div className="mt-6 overflow-hidden rounded-[1.75rem] border border-[#ead9be] shadow-[0_24px_80px_rgba(88,56,31,0.12)]">
+                <Image
+                  src="/images/premium-couple-berega.jpg"
+                  alt="Пара в современном пространстве"
+                  width={1400}
+                  height={950}
+                  className="h-64 w-full object-cover object-center"
+                />
               </div>
 
               <div className="mt-6 grid gap-4 sm:grid-cols-2">

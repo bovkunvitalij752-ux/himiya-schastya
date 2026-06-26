@@ -10,6 +10,7 @@ import {
   Sparkles,
   UsersRound,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -110,6 +111,15 @@ export default function AboutPage() {
               стресс, отношениям нужна такая же современная поддержка, как здоровью, финансам
               и образованию.
             </p>
+            <div className="mt-6 overflow-hidden rounded-[1.75rem] border border-[#ead9be] shadow-[0_24px_80px_rgba(88,56,31,0.12)]">
+              <Image
+                src="/images/about-couple-berega.jpg"
+                alt="Пара в теплом свете"
+                width={1400}
+                height={950}
+                className="h-72 w-full object-cover object-center"
+              />
+            </div>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {["Понимать", "Говорить", "Договариваться", "Сохранять тепло"].map((item) => (
                 <div key={item} className="rounded-2xl bg-[#fffaf2]/88 p-4 font-semibold text-[#342217]">
