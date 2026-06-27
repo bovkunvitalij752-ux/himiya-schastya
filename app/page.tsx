@@ -63,6 +63,24 @@ const diagnostics = [
   "Готовность к совместным решениям",
 ];
 
+const heroSignals = [
+  {
+    title: "AI-анализ",
+    text: "Видим повторяющиеся сценарии",
+    icon: BrainCircuit,
+  },
+  {
+    title: "Психология",
+    text: "Возвращаем ясность и опору",
+    icon: HeartHandshake,
+  },
+  {
+    title: "Осознанность",
+    text: "Помогаем говорить бережнее",
+    icon: Sparkles,
+  },
+];
+
 export default function HomePage() {
   return (
     <div className="overflow-hidden bg-[#fbf6ec] text-[#21160f]">
@@ -122,15 +140,26 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="absolute bottom-6 left-4 right-4 mx-auto grid max-w-7xl gap-3 sm:left-6 sm:right-6 md:grid-cols-3 lg:px-8">
-            {["AI-анализ", "Психология", "Осознанность"].map((item) => (
-              <div
-                key={item}
-                className="hidden rounded-2xl border border-white/18 bg-white/12 px-5 py-4 text-sm font-medium text-white/86 shadow-[0_20px_80px_rgba(0,0,0,0.18)] backdrop-blur-2xl md:block"
-              >
-                {item}
-              </div>
-            ))}
+          <div className="absolute bottom-6 left-4 right-4 mx-auto hidden max-w-7xl sm:left-6 sm:right-6 md:block lg:px-8">
+            <div className="grid overflow-hidden rounded-[1.75rem] border border-white/20 bg-[#fff7ec]/12 shadow-[0_28px_90px_rgba(24,14,9,0.20)] backdrop-blur-2xl md:grid-cols-3">
+              {heroSignals.map(({ icon: Icon, title, text }, index) => (
+                <div
+                  key={title}
+                  className="group relative flex min-h-24 items-center gap-4 px-5 py-4 transition duration-300 hover:bg-white/10"
+                >
+                  {index > 0 ? (
+                    <div className="absolute left-0 top-5 h-14 w-px bg-white/18" />
+                  ) : null}
+                  <div className="flex size-11 shrink-0 items-center justify-center rounded-2xl border border-white/18 bg-white/14 text-[#ffe5b6] shadow-[0_18px_50px_rgba(0,0,0,0.12)] transition duration-300 group-hover:bg-white/20">
+                    <Icon size={20} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-white">{title}</p>
+                    <p className="mt-1 text-sm leading-5 text-white/62">{text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
