@@ -4,8 +4,23 @@
 
 :root {
   color-scheme: light;
-  --background: #fbfaf7;
-  --foreground: #171717;
+  --background: #fbf6ec;
+  --foreground: #21150f;
+  --surface: #fffaf2;
+  --surface-strong: #ffffff;
+  --surface-glass: rgba(255, 250, 242, 0.72);
+  --border-soft: #ead9be;
+  --brand-ink: #21150f;
+  --brand-brown: #6f3b1f;
+  --brand-caramel: #d98a45;
+  --brand-gold: #ffd58c;
+  --brand-cream: #fbf6ec;
+  --text-muted: #6e5848;
+  --shadow-soft: 0 24px 90px rgba(88, 56, 31, 0.1);
+  --shadow-premium: 0 34px 120px rgba(33, 21, 15, 0.18);
+  --radius-card: 2rem;
+  --radius-panel: 2.5rem;
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * {
@@ -15,8 +30,8 @@
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(216, 111, 93, 0.16), transparent 28rem),
-    linear-gradient(180deg, #fbfaf7 0%, #f4f7f5 100%);
+    radial-gradient(circle at top left, rgba(217, 138, 69, 0.14), transparent 28rem),
+    linear-gradient(180deg, var(--brand-cream) 0%, #fffaf2 48%, #f4efe8 100%);
   color: var(--foreground);
   font-family:
     Inter,
@@ -34,7 +49,7 @@ a {
 }
 
 ::selection {
-  background: rgba(216, 111, 93, 0.26);
+  background: rgba(217, 138, 69, 0.26);
 }
 
 @keyframes rise {
@@ -50,5 +65,53 @@ a {
 }
 
 .animate-rise {
-  animation: rise 900ms ease-out both;
+  animation: rise 900ms var(--ease-premium) both;
+}
+
+@keyframes soft-fade {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-soft-fade {
+  animation: soft-fade 700ms var(--ease-premium) both;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  :focus-visible {
+    outline: 3px solid rgba(217, 138, 69, 0.45);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .ds-container {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .ds-section {
+    @apply px-4 py-20 sm:px-6 lg:px-8;
+  }
+
+  .ds-glass {
+    background: var(--surface-glass);
+    border: 1px solid rgba(234, 217, 190, 0.72);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(24px);
+  }
+
+  .ds-premium-gradient {
+    background: linear-gradient(135deg, var(--brand-ink) 0%, #3c2416 58%, var(--brand-brown) 100%);
+  }
 }
