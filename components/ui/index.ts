@@ -5,3 +5,4 @@ export * from "./field";
 export * from "./icon-frame";
 export * from "./page-heading";
 export * from "./section";
+export * from "./social-links";
