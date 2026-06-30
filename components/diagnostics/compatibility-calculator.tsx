@@ -239,7 +239,7 @@ function PartnerResultCard({ partner }: { partner: PartnerResult }) {
       <p className="mt-1 text-sm text-[#8a6a55]">
         {pad(partner.day)}.{pad(partner.month)}.{partner.year}
       </p>
-      <div className="mt-4 grid gap-3 sm:grid-cols-3">
+      <div className="mt-4 grid grid-cols-3 gap-3">
         <NumberPill label="Сознание" value={partner.consciousness} />
         <NumberPill label="Миссия" value={partner.mission} />
         <NumberPill label="Мир" value={partner.worldview} />
@@ -253,8 +253,10 @@ function PartnerResultCard({ partner }: { partner: PartnerResult }) {
 
 function NumberPill({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded-2xl bg-[#fff2d8] px-3 py-3 text-center">
-      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#b87835]">{label}</p>
+    <div className="min-w-0 rounded-2xl bg-[#fff2d8] px-2 py-3 text-center sm:px-3">
+      <p className="truncate text-[10px] font-semibold uppercase tracking-[0.08em] text-[#b87835] sm:text-[11px]">
+        {label}
+      </p>
       <p className="mt-1 text-2xl font-semibold text-[#23150d]">{value}</p>
     </div>
   );
