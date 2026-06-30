@@ -66,7 +66,7 @@ const steps = [
 export default function ConsultationsPage() {
   return (
     <div className="overflow-hidden bg-[#fbf6ec] text-[#21160f]">
-      <section className="relative px-4 pb-20 pt-20 sm:px-6 lg:px-8">
+      <section className="relative px-4 pb-16 pt-8 sm:px-6 sm:pt-10 lg:px-8 lg:pt-12">
         <div className="absolute inset-0 bg-[linear-gradient(135deg,#fbf6ec_0%,#fff8ea_50%,#f4efe8_100%)]" />
         <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_0.95fr] lg:items-center">
           <div className="animate-rise">
