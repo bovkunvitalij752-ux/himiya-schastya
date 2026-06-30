@@ -110,10 +110,14 @@ export default function HomePage() {
 
         <div className="relative mx-auto flex min-h-[92vh] w-full max-w-7xl flex-col justify-center px-4 pb-20 pt-24 sm:px-6 lg:px-8">
           <div className="max-w-3xl animate-rise text-white">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/12 px-4 py-2 text-sm font-medium text-white/90 shadow-[0_20px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl">
+            <Link
+              href="/diagnostics"
+              className="group inline-flex items-center gap-2 rounded-full border border-[#ffd58c]/70 bg-white/16 px-4 py-2 text-sm font-semibold text-white shadow-[0_0_34px_rgba(255,213,140,0.28),0_20px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-[#ffd58c] hover:bg-[#ffd58c]/22 hover:shadow-[0_0_46px_rgba(255,213,140,0.48),0_24px_90px_rgba(0,0,0,0.22)]"
+            >
               <Sparkles size={16} />
               AI-платформа для гармоничных отношений
-            </div>
+              <ArrowRight size={15} className="transition duration-300 group-hover:translate-x-1" />
+            </Link>
 
             <h1 className="mt-7 max-w-3xl text-6xl font-semibold leading-[0.98] tracking-[-0.03em] sm:text-7xl lg:text-8xl">
               Химия счастья
