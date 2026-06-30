@@ -12,6 +12,8 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
+import { IndividualCalculationCard } from "@/components/consultations/individual-calculation-card";
+
 export const metadata: Metadata = {
   title: "Консультации",
   description:
@@ -79,6 +81,7 @@ export default function ConsultationsPage() {
               Помогаем снизить напряжение, увидеть настоящую причину конфликта и найти
               следующий шаг без давления, стыда и обвинений.
             </p>
+            <IndividualCalculationCard />
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/contacts"
