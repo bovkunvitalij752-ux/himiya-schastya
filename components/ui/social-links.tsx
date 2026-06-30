@@ -17,8 +17,8 @@ type SocialLinksProps = {
 };
 
 export function SocialLinks({
-  vkHref = "#",
-  telegramHref = "#",
+  vkHref = "https://vk.com/club239873027",
+  telegramHref = "https://t.me/vasant_vikranti",
   variant = "light",
   className,
 }: SocialLinksProps) {
@@ -47,8 +47,8 @@ export function SocialLinks({
           <a
             key={link.label}
             href={link.href}
-            target={link.href === "#" ? undefined : "_blank"}
-            rel={link.href === "#" ? undefined : "noreferrer"}
+            target="_blank"
+            rel="noreferrer"
             className={cn(
               "inline-flex min-h-11 items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold backdrop-blur-xl transition duration-300 ease-premium hover:-translate-y-0.5",
               styles,
