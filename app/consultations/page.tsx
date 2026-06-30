@@ -66,9 +66,9 @@ const steps = [
 export default function ConsultationsPage() {
   return (
     <div className="overflow-hidden bg-[#fbf6ec] text-[#21160f]">
-      <section className="relative px-4 pb-16 pt-8 sm:px-6 sm:pt-10 lg:px-8 lg:pt-12">
+      <section className="relative px-4 pb-16 pt-3 sm:px-6 sm:pt-4 lg:px-8 lg:pt-5">
         <div className="absolute inset-0 bg-[linear-gradient(135deg,#fbf6ec_0%,#fff8ea_50%,#f4efe8_100%)]" />
-        <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_0.95fr] lg:items-center">
+        <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_0.95fr] lg:items-start">
           <div className="animate-rise">
             <div className="inline-flex items-center gap-2 rounded-full border border-[#ead9be] bg-white/60 px-4 py-2 text-sm font-semibold text-[#8a5527] shadow-[0_20px_70px_rgba(88,56,31,0.08)] backdrop-blur-xl">
               <Sparkles size={16} />
