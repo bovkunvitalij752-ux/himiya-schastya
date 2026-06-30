@@ -1,10 +1,11 @@
 "use client";
 
-import { ArrowRight, HeartHandshake, Menu, X } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { cn } from "@/lib/utils";
 
 const navigation = [
@@ -21,19 +22,9 @@ export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[#ead9be]/70 bg-[#fbf6ec]/78 shadow-[0_18px_70px_rgba(88,56,31,0.08)] backdrop-blur-2xl">
+    <header className="sticky top-0 z-50 border-b border-[#ead9be]/70 bg-[#fbf6ec]/82 shadow-[0_18px_70px_rgba(88,56,31,0.08)] backdrop-blur-2xl">
       <div className="mx-auto flex min-h-20 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-3" onClick={() => setIsOpen(false)}>
-          <span className="flex size-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#21150f,#6f3b1f)] text-white shadow-[0_18px_50px_rgba(33,21,15,0.20)]">
-            <HeartHandshake size={22} />
-          </span>
-          <span className="grid leading-tight">
-            <span className="text-base font-semibold tracking-[-0.02em] text-[#23150d]">
-              Химия счастья
-            </span>
-            <span className="text-xs font-medium text-[#8a6a55]">AI для отношений</span>
-          </span>
-        </Link>
+        <BrandLogo onClick={() => setIsOpen(false)} className="transition duration-300 hover:-translate-y-0.5" />
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Основная навигация">
           {navigation.map((item) => {

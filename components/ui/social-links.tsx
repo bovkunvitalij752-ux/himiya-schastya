@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 type SocialLink = {
   label: string;
-  href?: string;
+  href: string;
   icon: ReactNode;
 };
 
@@ -16,7 +16,12 @@ type SocialLinksProps = {
   className?: string;
 };
 
-export function SocialLinks({ vkHref, telegramHref, variant = "light", className }: SocialLinksProps) {
+export function SocialLinks({
+  vkHref = "#",
+  telegramHref = "#",
+  variant = "light",
+  className,
+}: SocialLinksProps) {
   const links: SocialLink[] = [
     {
       label: "ВКонтакте",
@@ -38,27 +43,12 @@ export function SocialLinks({ vkHref, telegramHref, variant = "light", className
             ? "border-white/12 bg-white/[0.07] text-white/74 hover:bg-white/12 hover:text-white"
             : "border-[#ead9be] bg-white/70 text-[#342217] hover:bg-white hover:text-[#21150f]";
 
-        if (!link.href) {
-          return (
-            <span
-              key={link.label}
-              className={cn(
-                "inline-flex min-h-11 items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold opacity-55 backdrop-blur-xl",
-                styles,
-              )}
-            >
-              {link.icon}
-              {link.label}
-            </span>
-          );
-        }
-
         return (
           <a
             key={link.label}
             href={link.href}
-            target="_blank"
-            rel="noreferrer"
+            target={link.href === "#" ? undefined : "_blank"}
+            rel={link.href === "#" ? undefined : "noreferrer"}
             className={cn(
               "inline-flex min-h-11 items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold backdrop-blur-xl transition duration-300 ease-premium hover:-translate-y-0.5",
               styles,

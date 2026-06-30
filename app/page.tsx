@@ -13,6 +13,8 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
+import { SocialLinks } from "@/components/ui/social-links";
+
 const breakdowns = [
   "Разговоры превращаются в защиту, молчание или взаимные претензии.",
   "Пара видит симптомы конфликта, но не замечает его настоящую причину.",
@@ -137,6 +139,13 @@ export default function HomePage() {
                 <Play size={17} />
                 Пройти диагностику
               </Link>
+            </div>
+
+            <div className="mt-6 inline-flex flex-col rounded-[1.5rem] border border-white/18 bg-white/10 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.14)] backdrop-blur-2xl">
+              <span className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+                Мы в соцсетях
+              </span>
+              <SocialLinks variant="dark" />
             </div>
           </div>
 

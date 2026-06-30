@@ -13,6 +13,8 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
+import { LogoStory } from "@/components/brand/logo-story";
+
 export const metadata: Metadata = {
   title: "О проекте",
   description:
@@ -130,6 +132,8 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <LogoStory />
 
       <section className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
