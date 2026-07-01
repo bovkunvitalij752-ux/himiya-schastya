@@ -215,13 +215,13 @@ export function IndividualCalculationCard() {
 
 function NumberBox({ label, value }: { label: string; value: number }) {
   return (
-    <div className="group relative min-w-0 overflow-hidden rounded-[999px] border border-[#f5dca8] bg-[radial-gradient(circle_at_50%_38%,#fff8c9_0%,#f5cd62_38%,#8a5a2a_100%)] px-2 py-4 text-center shadow-[0_18px_50px_rgba(184,120,53,0.24),inset_0_0_22px_rgba(255,255,255,0.72)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_70px_rgba(184,120,53,0.32),inset_0_0_26px_rgba(255,255,255,0.8)]">
-      <div className="pointer-events-none absolute inset-1 rounded-[999px] border border-white/45" />
-      <div className="pointer-events-none absolute left-1/2 top-2 h-5 w-10 -translate-x-1/2 rounded-full bg-white/45 blur-md" />
-      <p className="relative truncate text-[10px] font-semibold uppercase tracking-[0.08em] text-[#6f3b1f]">
+    <div className="group relative min-w-0 overflow-hidden rounded-[999px] border border-[#efd8aa] bg-[radial-gradient(circle_at_50%_34%,#fff8dc_0%,#f7df9f_45%,#d8ad5d_100%)] px-2 py-4 text-center shadow-[0_12px_34px_rgba(184,120,53,0.14),inset_0_0_18px_rgba(255,255,255,0.62)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_46px_rgba(184,120,53,0.2),inset_0_0_22px_rgba(255,255,255,0.72)]">
+      <div className="pointer-events-none absolute inset-1 rounded-[999px] border border-white/35" />
+      <div className="pointer-events-none absolute left-1/2 top-2 h-4 w-9 -translate-x-1/2 rounded-full bg-white/35 blur-md" />
+      <p className="relative truncate text-[10px] font-semibold uppercase tracking-[0.08em] text-[#8a5527]">
         {label}
       </p>
-      <p className="relative mt-1 text-3xl font-semibold tracking-[-0.05em] text-[#1f130b]">{value}</p>
+      <p className="relative mt-1 text-3xl font-semibold tracking-[-0.05em] text-[#2a1b11]">{value}</p>
     </div>
   );
 }
