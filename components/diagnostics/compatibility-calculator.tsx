@@ -267,10 +267,10 @@ function PartnerResultCard({ partner }: { partner: PartnerResult }) {
       <div className="mt-4 grid grid-cols-3 gap-3">
         <NumberPill label="Сознание" value={partner.consciousness} />
         <NumberPill label="Миссия" value={partner.mission} />
-        <NumberPill label="Мир" value={partner.worldview} />
+        <NumberPill label="Сфера" value={partner.worldview} />
       </div>
       <p className="mt-4 text-sm leading-6 text-[#6e5848]">
-        Сознание: {partner.consciousnessText}. Миссия: {partner.missionText}. Внутренний мир: {partner.worldviewText}.
+        Сознание: {partner.consciousnessText}. Миссия: {partner.missionText}. Сфера: {partner.worldviewText}.
       </p>
     </article>
   );
@@ -396,7 +396,7 @@ function getTension(
     return "Главная зона настройки — разные жизненные задачи. Может казаться, что партнёр хочет «не туда», хотя на самом деле каждый идёт к своей внутренней зрелости.";
   }
 
-  return "Напряжение может появляться из-за разного взгляда на мир, быт и безопасность. Помогают конкретные договорённости: что для каждого означает забота, свобода, порядок и уважение.";
+  return "Напряжение может появляться из-за разной сферы восприятия: быт, свобода, забота или порядок могут означать для партнёров разные вещи. Помогают конкретные договорённости: что для каждого означает безопасность, уважение и близость.";
 }
 
 function getCommunication(first: PartnerResult, second: PartnerResult, pairMission: number): string {
