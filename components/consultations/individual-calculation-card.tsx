@@ -191,7 +191,7 @@ export function IndividualCalculationCard() {
                 Базовая карта показывает три главные точки: Число Сознания, Миссию и Личный год.
               </p>
             </div>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-3 gap-3">
               <NumberBox label="ЧС" value={result.consciousness} />
               <NumberBox label="Миссия" value={result.mission} />
               <NumberBox label="Год" value={result.personalYear} />
@@ -215,11 +215,13 @@ export function IndividualCalculationCard() {
 
 function NumberBox({ label, value }: { label: string; value: number }) {
   return (
-    <div className="min-w-0 rounded-2xl bg-[#ffecc8] px-2 py-3 text-center">
-      <p className="truncate text-[10px] font-semibold uppercase tracking-[0.08em] text-[#b87835]">
+    <div className="group relative min-w-0 overflow-hidden rounded-[999px] border border-[#f5dca8] bg-[radial-gradient(circle_at_50%_38%,#fff8c9_0%,#f5cd62_38%,#8a5a2a_100%)] px-2 py-4 text-center shadow-[0_18px_50px_rgba(184,120,53,0.24),inset_0_0_22px_rgba(255,255,255,0.72)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_70px_rgba(184,120,53,0.32),inset_0_0_26px_rgba(255,255,255,0.8)]">
+      <div className="pointer-events-none absolute inset-1 rounded-[999px] border border-white/45" />
+      <div className="pointer-events-none absolute left-1/2 top-2 h-5 w-10 -translate-x-1/2 rounded-full bg-white/45 blur-md" />
+      <p className="relative truncate text-[10px] font-semibold uppercase tracking-[0.08em] text-[#6f3b1f]">
         {label}
       </p>
-      <p className="mt-1 text-2xl font-semibold text-[#23150d]">{value}</p>
+      <p className="relative mt-1 text-3xl font-semibold tracking-[-0.05em] text-[#1f130b]">{value}</p>
     </div>
   );
 }
