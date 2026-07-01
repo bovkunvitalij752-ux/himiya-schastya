@@ -145,11 +145,22 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="mt-6 inline-flex flex-col rounded-[1.5rem] border border-white/18 bg-white/10 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.14)] backdrop-blur-2xl">
-              <span className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
-                Мы в соцсетях
-              </span>
-              <SocialLinks variant="dark" />
+            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-stretch">
+              <div className="inline-flex flex-col rounded-[1.5rem] border border-white/18 bg-white/10 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.14)] backdrop-blur-2xl">
+                <span className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+                  Мы в соцсетях
+                </span>
+                <SocialLinks variant="dark" />
+              </div>
+
+              <Link
+                href="/consultations"
+                className="group inline-flex min-h-[6.5rem] items-center justify-center gap-2 rounded-[1.5rem] border border-[#ffd58c]/70 bg-white/16 px-6 py-4 text-sm font-semibold text-white shadow-[0_0_34px_rgba(255,213,140,0.28),0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-[#ffd58c] hover:bg-[#ffd58c]/22 hover:shadow-[0_0_46px_rgba(255,213,140,0.48),0_28px_90px_rgba(0,0,0,0.22)] sm:min-w-64"
+              >
+                <Sparkles size={17} />
+                AI - Личный разбор
+                <ArrowRight size={16} className="transition duration-300 group-hover:translate-x-1" />
+              </Link>
             </div>
           </div>
 
