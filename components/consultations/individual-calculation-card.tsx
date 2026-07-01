@@ -166,7 +166,7 @@ export function IndividualCalculationCard() {
       <div className="flex items-center justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b87835]">
-            Карта чисел
+            AI Личный разбор
           </p>
           <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-[#23150d]">
             Число сознания, миссия и личный год
