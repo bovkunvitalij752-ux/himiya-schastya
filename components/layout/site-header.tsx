@@ -23,7 +23,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#ead9be]/70 bg-[#fbf6ec]/82 shadow-[0_18px_70px_rgba(88,56,31,0.08)] backdrop-blur-2xl">
-      <div className="mx-auto flex min-h-20 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex min-h-28 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <BrandLogo onClick={() => setIsOpen(false)} className="transition duration-300 hover:-translate-y-0.5" />
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Основная навигация">

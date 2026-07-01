@@ -22,16 +22,19 @@ export function BrandLogo({
     <>
       <span
         className={cn(
-          "relative flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-2xl border shadow-[0_18px_50px_rgba(33,21,15,0.16)]",
-          inverted ? "border-white/14 bg-white" : "border-[#ead9be] bg-[#fbf6ec]",
+          "relative flex size-20 shrink-0 items-center justify-center overflow-hidden rounded-[1.65rem] border shadow-[0_22px_70px_rgba(184,120,53,0.22),inset_0_0_22px_rgba(255,255,255,0.52)] sm:size-24",
+          inverted
+            ? "border-white/18 bg-white"
+            : "border-[#e7c27b] bg-[radial-gradient(circle_at_50%_35%,#fff8df_0%,#f5dfa8_48%,#d7a94e_100%)]",
         )}
       >
+        <span className="pointer-events-none absolute inset-1 rounded-[1.35rem] border border-white/42" />
         <Image
           src="/images/brand-logo-mark.jpg"
           alt="Логотип Химия счастья"
           width={72}
           height={72}
-          className="size-full object-cover"
+          className="relative size-[88%] rounded-[1.15rem] object-cover brightness-[1.04] contrast-[1.04] sepia-[0.34] saturate-[1.45]"
           priority
         />
       </span>
@@ -54,11 +57,11 @@ export function BrandLogo({
   );
 
   if (!href) {
-    return <div className={cn("flex items-center gap-3", className)}>{content}</div>;
+    return <div className={cn("flex items-center gap-4", className)}>{content}</div>;
   }
 
   return (
-    <Link href={href} onClick={onClick} className={cn("flex items-center gap-3", className)}>
+    <Link href={href} onClick={onClick} className={cn("flex items-center gap-4", className)}>
       {content}
     </Link>
   );
