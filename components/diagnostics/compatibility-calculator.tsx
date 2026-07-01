@@ -15,10 +15,10 @@ type PartnerResult = {
   year: number;
   consciousness: number;
   mission: number;
-  worldview: number;
+  personalYear: number;
   consciousnessText: string;
   missionText: string;
-  worldviewText: string;
+  yearText: string;
 };
 
 type CompatibilityResult = {
@@ -267,10 +267,10 @@ function PartnerResultCard({ partner }: { partner: PartnerResult }) {
       <div className="mt-4 grid grid-cols-3 gap-3">
         <NumberPill label="Сознание" value={partner.consciousness} />
         <NumberPill label="Миссия" value={partner.mission} />
-        <NumberPill label="Сфера" value={partner.worldview} />
+        <NumberPill label="Год" value={partner.personalYear} />
       </div>
       <p className="mt-4 text-sm leading-6 text-[#6e5848]">
-        Сознание: {partner.consciousnessText}. Миссия: {partner.missionText}. Сфера: {partner.worldviewText}.
+        Сознание: {partner.consciousnessText}. Миссия: {partner.missionText}. Личный год: {partner.yearText}.
       </p>
     </article>
   );
@@ -306,10 +306,10 @@ function calculateCompatibility(first: PartnerInput, second: PartnerInput, focus
 
   const consciousnessGap = Math.abs(firstResult.consciousness - secondResult.consciousness);
   const missionGap = Math.abs(firstResult.mission - secondResult.mission);
-  const worldviewGap = Math.abs(firstResult.worldview - secondResult.worldview);
   const resonanceBonus = firstResult.mission === secondResult.consciousness || secondResult.mission === firstResult.consciousness ? 8 : 0;
   const familyBonus = pairMission === 6 || pairMission === 9 ? 5 : 0;
-  const rawScore = 96 - consciousnessGap * 6 - missionGap * 5 - worldviewGap * 3 + resonanceBonus + familyBonus;
+  const yearGap = Math.abs(firstResult.personalYear - secondResult.personalYear);
+  const rawScore = 96 - consciousnessGap * 6 - missionGap * 5 - yearGap * 2 + resonanceBonus + familyBonus;
   const score = Math.max(38, Math.min(97, rawScore));
 
   return {
@@ -321,7 +321,7 @@ function calculateCompatibility(first: PartnerInput, second: PartnerInput, focus
     level: getCompatibilityLevel(score),
     summary: getSummary(firstResult, secondResult, focus),
     strength: getStrength(score, pairMission, firstResult, secondResult),
-    tension: getTension(consciousnessGap, missionGap, worldviewGap, firstResult, secondResult),
+    tension: getTension(consciousnessGap, missionGap, yearGap, firstResult, secondResult),
     communication: getCommunication(firstResult, secondResult, pairMission),
     weeklyStep: weeklySteps[pairMission],
   };
@@ -329,9 +329,10 @@ function calculateCompatibility(first: PartnerInput, second: PartnerInput, focus
 
 function calculatePartner(partner: PartnerInput): PartnerResult {
   const [year, month, day] = partner.birthDate.split("-").map(Number);
+  const currentYear = new Date().getFullYear();
   const consciousness = digitalRoot(day);
   const mission = digitalRoot(day + month + year);
-  const worldview = digitalRoot(month + year);
+  const personalYear = digitalRoot(day + month + currentYear);
 
   return {
     name: partner.name.trim(),
@@ -340,10 +341,10 @@ function calculatePartner(partner: PartnerInput): PartnerResult {
     year,
     consciousness,
     mission,
-    worldview,
+    personalYear,
     consciousnessText: numberMeanings[consciousness],
     missionText: numberMeanings[mission],
-    worldviewText: numberMeanings[worldview],
+    yearText: getYearText(personalYear),
   };
 }
 
@@ -382,11 +383,11 @@ function getStrength(score: number, pairMission: number, first: PartnerResult, s
 function getTension(
   consciousnessGap: number,
   missionGap: number,
-  worldviewGap: number,
+  yearGap: number,
   first: PartnerResult,
   second: PartnerResult,
 ): string {
-  const biggestGap = Math.max(consciousnessGap, missionGap, worldviewGap);
+  const biggestGap = Math.max(consciousnessGap, missionGap, yearGap);
 
   if (biggestGap === consciousnessGap) {
     return `${first.name} и ${second.name} могут по-разному реагировать в моменте: один быстрее действует, другой может чувствовать ситуацию иначе. Важно не спорить о том, чья реакция правильная, а сначала назвать потребность.`;
@@ -396,7 +397,23 @@ function getTension(
     return "Главная зона настройки — разные жизненные задачи. Может казаться, что партнёр хочет «не туда», хотя на самом деле каждый идёт к своей внутренней зрелости.";
   }
 
-  return "Напряжение может появляться из-за разной сферы восприятия: быт, свобода, забота или порядок могут означать для партнёров разные вещи. Помогают конкретные договорённости: что для каждого означает безопасность, уважение и близость.";
+  return "Напряжение может появляться из-за разных ритмов личного года: одному важно ускоряться, другому завершать, укрепляться или настраивать контакт. Помогают конкретные договорённости на ближайшие 7 дней.";
+}
+
+function getYearText(value: number): string {
+  const years: Record<number, string> = {
+    1: "год старта и личного решения",
+    2: "год контакта и настройки отношений",
+    3: "год обучения, анализа и расширения",
+    4: "год мистики и порядка",
+    5: "год перемен, движения и обновления",
+    6: "год любви, семьи и ответственности",
+    7: "год глубины, тишины и внутренней работы",
+    8: "год результата, денег и управления",
+    9: "год завершения, мудрости и освобождения",
+  };
+
+  return years[value];
 }
 
 function getCommunication(first: PartnerResult, second: PartnerResult, pairMission: number): string {
