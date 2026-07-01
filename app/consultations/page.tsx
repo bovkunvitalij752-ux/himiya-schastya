@@ -3,7 +3,6 @@ import {
   ArrowRight,
   CalendarCheck,
   CheckCircle2,
-  HeartHandshake,
   MessageCircleHeart,
   ShieldCheck,
   Sparkles,
@@ -12,6 +11,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { IndividualCalculationCard } from "@/components/consultations/individual-calculation-card";
 
 export const metadata: Metadata = {
@@ -109,9 +109,7 @@ export default function ConsultationsPage() {
                   Встреча без давления
                 </h2>
               </div>
-              <div className="flex size-12 items-center justify-center rounded-2xl bg-[#21150f] text-[#ffd58c]">
-                <HeartHandshake size={24} />
-              </div>
+              <BrandLogo showText={false} className="[&>span]:size-16 [&>span]:rounded-3xl" />
             </div>
             <div className="mt-6 overflow-hidden rounded-[1.75rem] border border-[#ead9be] shadow-[0_24px_80px_rgba(88,56,31,0.12)]">
               <Image
