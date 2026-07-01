@@ -2,6 +2,7 @@
 
 import { ArrowRight, CalendarDays, HeartHandshake, ShieldCheck, Sparkles, UsersRound } from "lucide-react";
 import { FormEvent, useMemo, useState } from "react";
+import Link from "next/link";
 
 type PartnerInput = {
   name: string;
@@ -255,6 +256,45 @@ function CompatibilityReport({ result }: { result: CompatibilityResult }) {
       </div>
 
       <ExpandedPairReading result={result} />
+      <PairResultCallToAction />
+    </div>
+  );
+}
+
+function PairResultCallToAction() {
+  return (
+    <div className="mt-5 overflow-hidden rounded-[1.75rem] border border-[#e6c99a] bg-[#21150f] p-5 text-white shadow-[0_28px_80px_rgba(33,21,15,0.18)] sm:p-6">
+      <div className="grid gap-5 md:grid-cols-[1fr_auto] md:items-center">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffd58c]">
+            Следующий шаг
+          </p>
+          <h4 className="mt-2 text-2xl font-semibold tracking-[-0.04em]">
+            Получить полный разбор пары
+          </h4>
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-white/72">
+            Предварительная диагностика показывает направление. На консультации мы разбираем вашу
+            ситуацию глубже: сценарии конфликтов, потребности каждого партнёра, точки близости,
+            деньги, быт, границы и конкретные договорённости для пары.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-3 sm:flex-row md:flex-col">
+          <Link
+            href="/consultations"
+            className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-[#21150f] transition duration-300 hover:-translate-y-0.5 hover:bg-[#fff4dc]"
+          >
+            Записаться на консультацию
+            <ArrowRight size={16} className="transition duration-300 group-hover:translate-x-1" />
+          </Link>
+          <Link
+            href="/contacts"
+            className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/24 px-6 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-white/10"
+          >
+            Задать вопрос
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
