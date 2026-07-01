@@ -253,6 +253,59 @@ function CompatibilityReport({ result }: { result: CompatibilityResult }) {
         <ReportBlock icon={<UsersRound size={18} />} title="Как лучше говорить" text={result.communication} />
         <ReportBlock icon={<CalendarDays size={18} />} title="Шаг на 7 дней" text={result.weeklyStep} />
       </div>
+
+      <ExpandedPairReading result={result} />
+    </div>
+  );
+}
+
+function ExpandedPairReading({ result }: { result: CompatibilityResult }) {
+  const emotionalPattern = getEmotionalPattern(result.first, result.second);
+  const hiddenRisk = getHiddenRisk(result.first, result.second, result.pairMission);
+  const practicalFocus = getPracticalFocus(result.pairMission);
+  const consultationHint = getConsultationHint(result.score);
+
+  return (
+    <div className="mt-5 rounded-[1.75rem] border border-[#e6c99a] bg-[linear-gradient(135deg,#fffdf8_0%,#fff7e8_100%)] p-5 shadow-[0_22px_64px_rgba(184,120,53,0.10)] sm:p-6">
+      <div className="flex flex-col gap-3 border-b border-[#ead9be] pb-5 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#b87835]">
+            Развернутый разбор пары
+          </p>
+          <h4 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-[#23150d]">
+            Как эта связь проявляется в жизни
+          </h4>
+        </div>
+        <div className="rounded-full border border-[#ead9be] bg-white/75 px-4 py-2 text-sm font-semibold text-[#8a5527]">
+          Миссия союза: {result.pairMission}
+        </div>
+      </div>
+
+      <div className="mt-5 grid gap-4 md:grid-cols-2">
+        <DetailedPairBlock title="Эмоциональный сценарий" text={emotionalPattern} />
+        <DetailedPairBlock title="Скрытый риск" text={hiddenRisk} />
+        <DetailedPairBlock title="Что укрепляет пару" text={practicalFocus} />
+        <DetailedPairBlock title="Следующий зрелый шаг" text={consultationHint} />
+      </div>
+
+      <div className="mt-5 rounded-[1.35rem] border border-[#ead9be] bg-white/72 p-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#b87835]">Мини-практика</p>
+        <p className="mt-2 text-sm leading-7 text-[#6e5848]">
+          В течение недели каждый партнёр отвечает письменно на три вопроса: «Что во мне сейчас просит
+          внимания?», «Где я защищаюсь вместо того, чтобы говорить прямо?», «Какой один шаг я готов
+          сделать для тепла между нами?». Потом ответы обсуждаются без спора и без попытки сразу
+          исправить другого.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function DetailedPairBlock({ title, text }: { title: string; text: string }) {
+  return (
+    <div className="rounded-[1.35rem] border border-[#ead9be] bg-white/68 p-4">
+      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#b87835]">{title}</p>
+      <p className="mt-2 text-sm leading-7 text-[#6e5848]">{text}</p>
     </div>
   );
 }
@@ -420,6 +473,60 @@ function getYearText(value: number): string {
 
 function getCommunication(first: PartnerResult, second: PartnerResult, pairMission: number): string {
   return `Лучший стиль общения для этой пары — меньше обвинений и больше перевода: «я чувствую», «мне важно», «я прошу». Для миссии ${pairMission} особенно полезно регулярно сверяться, где каждому тепло, а где он начинает закрываться.`;
+}
+
+function getEmotionalPattern(first: PartnerResult, second: PartnerResult): string {
+  if (first.consciousness === second.consciousness) {
+    return `У ${first.name} и ${second.name} похожий способ включаться в события: оба идут через ${first.consciousnessText}. Это даёт ощущение узнавания, но иногда усиливает одинаковые реакции. Если оба одновременно защищаются, спор может идти по кругу. Важно заранее договориться, кто первым делает паузу и возвращает разговор в спокойный тон.`;
+  }
+
+  return `${first.name} чаще проявляется через ${first.consciousnessText}, а ${second.name} — через ${second.consciousnessText}. Поэтому один партнёр может считать свою реакцию очевидной, а второй будет проживать ситуацию совершенно иначе. Сила пары появляется тогда, когда различие не воспринимается как угроза, а становится способом увидеть шире.`;
+}
+
+function getHiddenRisk(first: PartnerResult, second: PartnerResult, pairMission: number): string {
+  const missionGap = Math.abs(first.mission - second.mission);
+
+  if (missionGap >= 4) {
+    return `Главный риск — ощущение, что вы идёте к разным целям. ${first.name} раскрывается через ${first.missionText}, а ${second.name} — через ${second.missionText}. Здесь нельзя требовать одинакового темпа и одинаковых желаний. Лучше искать общий язык через миссию пары ${pairMission}: ${pairMissionMeanings[pairMission]}.`;
+  }
+
+  if (first.personalYear !== second.personalYear) {
+    return `Сейчас у партнёров разные ритмы года: у ${first.name} — ${first.yearText}, у ${second.name} — ${second.yearText}. Из-за этого один может хотеть движения, а другой — порядка, тишины или завершения старого. Напряжение снижается, когда планы строятся короткими шагами, а не большими обещаниями.`;
+  }
+
+  return `Риск не в несовместимости, а в привычке не проговаривать тонкие места. Когда чувства копятся молча, даже сильная связь начинает восприниматься как давление. Паре важно регулярно возвращаться к честному разговору: не кто виноват, а что каждый сейчас чувствует и в чём нуждается.`;
+}
+
+function getPracticalFocus(pairMission: number): string {
+  const focuses: Record<number, string> = {
+    1: "Пару укрепляют общие решения, уважение к личной силе каждого и честное распределение ответственности. Не соревнуйтесь за право быть главным — создайте пространство, где оба могут проявляться.",
+    2: "Пару укрепляют нежность, доверие, внимательное слушание и маленькие жесты заботы. Здесь важна эмоциональная безопасность: меньше резкости, больше уточнений и признания чувств.",
+    3: "Пару укрепляют разговор, юмор, творчество, совместные впечатления и лёгкость. Если отношения становятся слишком тяжёлыми, возвращайте живое общение и способность смеяться без обесценивания.",
+    4: "Пару укрепляют порядок, договорённости, быт, финансовая ясность и понятные правила. Любовь здесь растёт спокойнее, когда есть ощущение надёжного фундамента.",
+    5: "Пару укрепляют свобода, движение, путешествия, честность и право на личное пространство. Главное — не путать свободу с побегом, а перемены с разрушением.",
+    6: "Пару укрепляют семейность, красота, телесное тепло, забота и общий дом. Важно следить, чтобы забота не превращалась в обязанность и скрытую обиду.",
+    7: "Пару укрепляют глубина, уважение к тишине, совместное обучение и честный разговор о смыслах. Не давите на быстрые ответы — этой связи нужна внутренняя зрелость.",
+    8: "Пару укрепляют общие цели, деньги, проекты, стратегия и уважение к силе друг друга. Важно не превращать отношения в борьбу за контроль.",
+    9: "Пару укрепляют большой смысл, принятие, служение и способность отпускать старые обиды. Но важно не становиться спасателями друг для друга.",
+  };
+
+  return focuses[pairMission];
+}
+
+function getConsultationHint(score: number): string {
+  if (score >= 85) {
+    return "У пары сильный потенциал. Следующий шаг — не ждать кризиса, а осознанно укреплять то, что уже работает: договорённости, ритуалы близости, общие цели и культуру спокойного разговора.";
+  }
+
+  if (score >= 70) {
+    return "Совместимость хорошая, но есть зоны настройки. Самый полезный шаг — выбрать один повторяющийся конфликт и разобрать его как систему: что запускает реакцию, что каждый защищает и какая новая договорённость нужна.";
+  }
+
+  if (score >= 55) {
+    return "Потенциал есть, но без осознанного диалога пара может часто возвращаться к одним и тем же сценариям. Лучше не копить обиды, а пройти диагностику глубже: роли, ожидания, деньги, близость и границы.";
+  }
+
+  return "Эта связь может быть трансформационной: она многое показывает, но требует бережности. Здесь особенно важна консультация или глубокая диагностика, чтобы не лечить боль взаимными претензиями.";
 }
 
 function pad(value: number): string {
