@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, CalendarDays, HeartHandshake, ShieldCheck, UsersRound } from "lucide-react";
+import { ArrowRight, CalendarDays, HeartHandshake, ShieldCheck, Sparkles, UsersRound } from "lucide-react";
 import { FormEvent, useMemo, useState } from "react";
 
 type PartnerInput = {
@@ -18,6 +18,7 @@ type PartnerResult = {
   worldview: number;
   consciousnessText: string;
   missionText: string;
+  worldviewText: string;
 };
 
 type CompatibilityResult = {
@@ -27,31 +28,47 @@ type CompatibilityResult = {
   pairMissionText: string;
   score: number;
   level: string;
-  advice: string;
+  summary: string;
+  strength: string;
+  tension: string;
+  communication: string;
+  weeklyStep: string;
 };
 
 const numberMeanings: Record<number, string> = {
-  1: "инициатива, лидерство, самостоятельность",
-  2: "чувствительность, партнёрство, дипломатия",
-  3: "общение, творчество, лёгкость",
-  4: "структура, быт, ответственность",
-  5: "свобода, движение, перемены",
-  6: "любовь, семья, забота, красота",
-  7: "глубина, анализ, духовный поиск",
-  8: "сила, деньги, управление, результат",
-  9: "мудрость, служение, широкий смысл",
+  1: "инициатива, лидерство, самостоятельность и желание влиять на происходящее",
+  2: "чувствительность, партнёрство, дипломатия и потребность в мягком контакте",
+  3: "общение, творчество, лёгкость, юмор и живое эмоциональное выражение",
+  4: "структура, быт, ответственность, правила и желание опереться на понятный порядок",
+  5: "свобода, движение, перемены, честность и потребность не чувствовать ограничения",
+  6: "любовь, семья, забота, красота, дом и стремление сделать близким хорошо",
+  7: "глубина, анализ, внутренняя тишина, смысл и потребность понимать причины",
+  8: "сила, деньги, управление, результат, статус и умение собирать ресурсы",
+  9: "мудрость, служение, широкий смысл, принятие и способность смотреть масштабно",
 };
 
 const pairMissionMeanings: Record<number, string> = {
   1: "учиться действовать вместе и не бороться за главную роль",
   2: "создавать доверие, слышать чувства и договариваться мягко",
   3: "возвращать лёгкость, юмор, разговор и совместное творчество",
-  4: "строить устойчивый дом, правила и понятный быт",
-  5: "сохранять свободу, движение и честность без хаоса",
+  4: "строить устойчивый дом, правила, быт и понятную систему договорённостей",
+  5: "сохранять свободу, движение и честность без хаоса и резких побегов",
   6: "раскрывать любовь, семью, красоту и заботу без самопожертвования",
-  7: "углублять понимание, уважать тишину и личное пространство",
-  8: "соединять амбиции, деньги, статус и ответственность",
-  9: "служить большему смыслу и не растворяться в спасательстве",
+  7: "углублять понимание, уважать тишину, личное пространство и внутренний поиск",
+  8: "соединять амбиции, деньги, статус и ответственность без борьбы за власть",
+  9: "служить большему смыслу и не растворяться в роли спасателей",
+};
+
+const weeklySteps: Record<number, string> = {
+  1: "выберите одно общее решение и спокойно распределите, кто за что отвечает",
+  2: "проведите разговор без советов: каждый говорит о чувствах, второй только слушает и уточняет",
+  3: "сделайте вместе что-то лёгкое: прогулка, свидание, юмор, музыка или творческий вечер",
+  4: "наведите порядок в одной бытовой теме: деньги, дом, расписание, обязанности или планы",
+  5: "обсудите, где каждому нужно больше свободы, и договоритесь о границах без обид",
+  6: "создайте маленький семейный ритуал заботы: ужин, благодарность, объятие, совместное дело",
+  7: "дайте друг другу пространство и затем обсудите один глубокий вопрос без давления",
+  8: "выберите общую цель на месяц и пропишите первый практический шаг к ней",
+  9: "закройте старую обиду или незавершённый разговор, чтобы не тащить его дальше",
 };
 
 export function CompatibilityCalculator() {
@@ -106,7 +123,7 @@ export function CompatibilityCalculator() {
             title="Партнёр 2"
             value={second}
             onChange={setSecond}
-            namePlaceholder="Например: Викранти"
+            namePlaceholder="Например: Виктория"
           />
         </div>
 
@@ -120,7 +137,7 @@ export function CompatibilityCalculator() {
             <option value="отношения">Отношения</option>
             <option value="семья">Семья</option>
             <option value="конфликт">Конфликт</option>
-            <option value="миссия">Совместная миссия</option>
+            <option value="совместная миссия">Совместная миссия</option>
           </select>
         </label>
 
@@ -128,7 +145,8 @@ export function CompatibilityCalculator() {
           <div className="flex gap-3">
             <ShieldCheck className="mt-0.5 shrink-0 text-[#b87835]" size={22} />
             <p className="text-sm leading-6 text-[#6e5848]">
-              Это предварительный нумерологический расчёт для самонаблюдения. Он не заменяет консультацию специалиста.
+              Это предварительный нумерологический разбор для самонаблюдения. Он помогает увидеть ритмы пары,
+              но не заменяет живую консультацию и глубокую диагностику отношений.
             </p>
           </div>
         </div>
@@ -201,6 +219,7 @@ function CompatibilityReport({ result }: { result: CompatibilityResult }) {
           <h3 className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-[#23150d]">
             {result.first.name} + {result.second.name}
           </h3>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-[#6e5848]">{result.summary}</p>
         </div>
         <div className="rounded-[1.5rem] bg-[#21150f] px-5 py-4 text-center text-white">
           <p className="text-sm text-white/64">Совместимость</p>
@@ -213,7 +232,7 @@ function CompatibilityReport({ result }: { result: CompatibilityResult }) {
         <PartnerResultCard partner={result.second} />
       </div>
 
-      <div className="mt-5 grid gap-4 md:grid-cols-[0.75fr_1.25fr]">
+      <div className="mt-5 grid gap-4 md:grid-cols-[0.8fr_1.2fr]">
         <div className="rounded-[1.5rem] border border-[#ead9be] bg-white p-5">
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#b87835]">Миссия пары</p>
           <p className="mt-3 text-5xl font-semibold tracking-[-0.06em] text-[#23150d]">{result.pairMission}</p>
@@ -225,8 +244,14 @@ function CompatibilityReport({ result }: { result: CompatibilityResult }) {
             <p className="text-sm font-semibold uppercase tracking-[0.16em]">Вывод</p>
           </div>
           <h4 className="mt-4 text-2xl font-semibold tracking-[-0.03em] text-[#23150d]">{result.level}</h4>
-          <p className="mt-3 leading-7 text-[#6e5848]">{result.advice}</p>
+          <p className="mt-3 leading-7 text-[#6e5848]">{result.strength}</p>
         </div>
+      </div>
+
+      <div className="mt-5 grid gap-4 md:grid-cols-3">
+        <ReportBlock icon={<Sparkles size={18} />} title="Где может быть напряжение" text={result.tension} />
+        <ReportBlock icon={<UsersRound size={18} />} title="Как лучше говорить" text={result.communication} />
+        <ReportBlock icon={<CalendarDays size={18} />} title="Шаг на 7 дней" text={result.weeklyStep} />
       </div>
     </div>
   );
@@ -245,9 +270,19 @@ function PartnerResultCard({ partner }: { partner: PartnerResult }) {
         <NumberPill label="Мир" value={partner.worldview} />
       </div>
       <p className="mt-4 text-sm leading-6 text-[#6e5848]">
-        Сознание: {partner.consciousnessText}. Миссия: {partner.missionText}.
+        Сознание: {partner.consciousnessText}. Миссия: {partner.missionText}. Внутренний мир: {partner.worldviewText}.
       </p>
     </article>
+  );
+}
+
+function ReportBlock({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) {
+  return (
+    <div className="rounded-[1.5rem] border border-[#ead9be] bg-white/78 p-5">
+      <div className="flex size-10 items-center justify-center rounded-2xl bg-[#fff2d8] text-[#b87835]">{icon}</div>
+      <h4 className="mt-4 text-lg font-semibold tracking-[-0.03em] text-[#23150d]">{title}</h4>
+      <p className="mt-2 text-sm leading-6 text-[#6e5848]">{text}</p>
+    </div>
   );
 }
 
@@ -284,7 +319,11 @@ function calculateCompatibility(first: PartnerInput, second: PartnerInput, focus
     pairMissionText: pairMissionMeanings[pairMission],
     score,
     level: getCompatibilityLevel(score),
-    advice: getAdvice(score, pairMission, focus),
+    summary: getSummary(firstResult, secondResult, focus),
+    strength: getStrength(score, pairMission, firstResult, secondResult),
+    tension: getTension(consciousnessGap, missionGap, worldviewGap, firstResult, secondResult),
+    communication: getCommunication(firstResult, secondResult, pairMission),
+    weeklyStep: weeklySteps[pairMission],
   };
 }
 
@@ -304,6 +343,7 @@ function calculatePartner(partner: PartnerInput): PartnerResult {
     worldview,
     consciousnessText: numberMeanings[consciousness],
     missionText: numberMeanings[mission],
+    worldviewText: numberMeanings[worldview],
   };
 }
 
@@ -326,13 +366,41 @@ function getCompatibilityLevel(score: number): string {
   return "Трансформационная пара: потребуется больше бережности";
 }
 
-function getAdvice(score: number, pairMission: number, focus: string): string {
-  const base =
-    score >= 70
-      ? "У пары есть хороший резонанс. Важно не считать близость чем-то автоматическим: проговаривайте ожидания и закрепляйте договорённости."
-      : "В паре могут включаться разные ритмы. Начните с простого разговора без обвинений: что каждому важно, чего не хватает и какой маленький шаг можно сделать на этой неделе.";
+function getSummary(first: PartnerResult, second: PartnerResult, focus: string): string {
+  return `В фокусе «${focus}» эта пара соединяет ${first.consciousnessText} и ${second.consciousnessText}. Такой союз может быть очень живым, если партнёры не пытаются переделать друг друга, а учатся переводить свои разные реакции на понятный язык.`;
+}
 
-  return `${base} В фокусе “${focus}” миссия пары ${pairMission}: ${pairMissionMeanings[pairMission]}.`;
+function getStrength(score: number, pairMission: number, first: PartnerResult, second: PartnerResult): string {
+  const scoreText =
+    score >= 70
+      ? "У пары есть хороший резонанс: здесь можно строить доверие, общие планы и зрелую близость."
+      : "Пара может быть непростой, но именно поэтому она способна многое подсветить и вывести отношения на новый уровень.";
+
+  return `${scoreText} Главная сила союза — миссия ${pairMission}: ${pairMissionMeanings[pairMission]}. Особенно важно, что ${first.name} несёт ${first.missionText}, а ${second.name} — ${second.missionText}.`;
+}
+
+function getTension(
+  consciousnessGap: number,
+  missionGap: number,
+  worldviewGap: number,
+  first: PartnerResult,
+  second: PartnerResult,
+): string {
+  const biggestGap = Math.max(consciousnessGap, missionGap, worldviewGap);
+
+  if (biggestGap === consciousnessGap) {
+    return `${first.name} и ${second.name} могут по-разному реагировать в моменте: один быстрее действует, другой может чувствовать ситуацию иначе. Важно не спорить о том, чья реакция правильная, а сначала назвать потребность.`;
+  }
+
+  if (biggestGap === missionGap) {
+    return "Главная зона настройки — разные жизненные задачи. Может казаться, что партнёр хочет «не туда», хотя на самом деле каждый идёт к своей внутренней зрелости.";
+  }
+
+  return "Напряжение может появляться из-за разного взгляда на мир, быт и безопасность. Помогают конкретные договорённости: что для каждого означает забота, свобода, порядок и уважение.";
+}
+
+function getCommunication(first: PartnerResult, second: PartnerResult, pairMission: number): string {
+  return `Лучший стиль общения для этой пары — меньше обвинений и больше перевода: «я чувствую», «мне важно», «я прошу». Для миссии ${pairMission} особенно полезно регулярно сверяться, где каждому тепло, а где он начинает закрываться.`;
 }
 
 function pad(value: number): string {
