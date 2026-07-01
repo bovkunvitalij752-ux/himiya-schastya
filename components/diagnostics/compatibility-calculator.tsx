@@ -265,7 +265,7 @@ function PartnerResultCard({ partner }: { partner: PartnerResult }) {
         {pad(partner.day)}.{pad(partner.month)}.{partner.year}
       </p>
       <div className="mt-4 grid grid-cols-3 gap-3">
-        <NumberPill label="Сознание" value={partner.consciousness} />
+        <NumberPill label="ЧС" value={partner.consciousness} />
         <NumberPill label="Миссия" value={partner.mission} />
         <NumberPill label="Год" value={partner.personalYear} />
       </div>
@@ -288,11 +288,13 @@ function ReportBlock({ icon, title, text }: { icon: React.ReactNode; title: stri
 
 function NumberPill({ label, value }: { label: string; value: number }) {
   return (
-    <div className="min-w-0 rounded-2xl bg-[#fff2d8] px-2 py-3 text-center sm:px-3">
-      <p className="truncate text-[10px] font-semibold uppercase tracking-[0.08em] text-[#b87835] sm:text-[11px]">
+    <div className="group relative min-w-0 overflow-hidden rounded-[999px] border border-[#efd8aa] bg-[radial-gradient(circle_at_50%_34%,#fff8dc_0%,#f7df9f_45%,#d8ad5d_100%)] px-2 py-4 text-center shadow-[0_12px_34px_rgba(184,120,53,0.14),inset_0_0_18px_rgba(255,255,255,0.62)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_46px_rgba(184,120,53,0.2),inset_0_0_22px_rgba(255,255,255,0.72)]">
+      <div className="pointer-events-none absolute inset-1 rounded-[999px] border border-white/35" />
+      <div className="pointer-events-none absolute left-1/2 top-2 h-4 w-9 -translate-x-1/2 rounded-full bg-white/35 blur-md" />
+      <p className="relative truncate text-[10px] font-semibold uppercase tracking-[0.08em] text-[#8a5527]">
         {label}
       </p>
-      <p className="mt-1 text-2xl font-semibold text-[#23150d]">{value}</p>
+      <p className="relative mt-1 text-3xl font-semibold tracking-[-0.05em] text-[#2a1b11]">{value}</p>
     </div>
   );
 }
