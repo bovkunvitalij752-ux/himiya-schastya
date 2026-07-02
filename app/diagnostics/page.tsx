@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import {
+  ArrowRight,
   BrainCircuit,
   CheckCircle2,
   HeartHandshake,
@@ -9,6 +10,7 @@ import {
 } from "lucide-react";
 
 import { CompatibilityCalculator } from "@/components/diagnostics/compatibility-calculator";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "AI-диагностика совместимости",
@@ -83,6 +85,15 @@ export default function DiagnosticsPage() {
                 </div>
               ))}
             </div>
+
+            <Link
+              href="/consultations"
+              className="group mt-5 inline-flex min-h-14 items-center justify-center gap-2 rounded-full border border-[#d8ad5d]/70 bg-[#21150f] px-6 text-sm font-semibold text-white shadow-[0_0_34px_rgba(255,213,140,0.30),0_22px_70px_rgba(33,21,15,0.18)] transition duration-300 hover:-translate-y-0.5 hover:border-[#ffd58c] hover:bg-[#6f3b1f] hover:shadow-[0_0_46px_rgba(255,213,140,0.52),0_26px_84px_rgba(33,21,15,0.22)]"
+            >
+              <Sparkles size={17} />
+              AI - Личный разбор
+              <ArrowRight size={16} className="transition duration-300 group-hover:translate-x-1" />
+            </Link>
           </div>
 
           <CompatibilityCalculator />
